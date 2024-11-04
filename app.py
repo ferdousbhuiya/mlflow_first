@@ -79,13 +79,7 @@ if __name__ == "__main__":
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
         
-        import dagshub
-        dagshub.init(repo_owner='ferdousbhuiya', repo_name='mlflow_first', mlflow=True)
-
-        import mlflow
-        with mlflow.start_run():
-            mlflow.log_param('parameter name', 'value')
-            mlflow.log_metric('metric name', 1)
+        
         
         # For remote server only(DAGShub)
         remote_server_uri="https://dagshub.com/ferdousbhuiya/mlflow_first.mlflow"
