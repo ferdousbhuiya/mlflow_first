@@ -78,7 +78,17 @@ if __name__ == "__main__":
 
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
-        
+        import dagshub
+        import mlflow
+
+        # Initialize DagsHub integration
+        dagshub.init(repo_owner='ferdousbhuiya', repo_name='mlflow_first', mlflow=True)
+
+        # Use MLflow to log parameters and metrics
+        with mlflow.start_run():
+            mlflow.log_param('parameter name', 'value')
+            mlflow.log_metric('metric name', 1)
+
         
         
         # For remote server only(DAGShub)
@@ -98,3 +108,5 @@ if __name__ == "__main__":
             )
         else:
             mlflow.sklearn.log_model(lr, "model", signature=signature)
+            
+            
