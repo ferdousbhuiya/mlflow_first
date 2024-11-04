@@ -67,6 +67,8 @@ if __name__ == "__main__":
         print(f"  RMSE: {rmse}")
         print(f"  MAE: {mae}")
         print(f"  R2: {r2}")
+        
+        
 
         mlflow.log_param("alpha", alpha)
         mlflow.log_param("l1_ratio", l1_ratio)
@@ -76,6 +78,18 @@ if __name__ == "__main__":
 
         predictions = lr.predict(train_x)
         signature = infer_signature(train_x, predictions)
+        
+        import dagshub
+        dagshub.init(repo_owner='ferdousbhuiya', repo_name='mlflow_first', mlflow=True)
+
+        import mlflow
+        with mlflow.start_run():
+            mlflow.log_param('parameter name', 'value')
+            mlflow.log_metric('metric name', 1)
+        
+        # For remote server only(DAGShub)
+        remote_server_uri="https://dagshub.com/ferdousbhuiya/mlflow_first.mlflow"
+        mlflow.set_tracking_uri(remote_server_uri)
 
         tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 

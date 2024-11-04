@@ -1,5 +1,7 @@
 #mlflowexperiments
 
+
+MYFLOW_TRACKING_URI=https://dagshub.com/ferdousbhuiya/mlflow_first.mlflow
 import dagshub
 dagshub.init(repo_owner='ferdousbhuiya', repo_name='mlflow_first', mlflow=True)
 
